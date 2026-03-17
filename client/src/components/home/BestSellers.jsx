@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 import { useCart } from '../../context/CartContext';
+import ProductBadge from '../product/ProductBadge';
 
 const BestSellers = () => {
   const [products, setProducts] = useState([]);
@@ -59,14 +60,17 @@ const BestSellers = () => {
         {products.map((product) => (
           <div key={product._id} className="col-12 col-sm-6 col-lg-3">
             <div className="card h-100 border-0 shadow-sm">
-              <Link to={`/product/${product._id}`} className="text-decoration-none text-dark">
-                <img 
-                  src={product.images[0]} 
-                  className="card-img-top rounded-top" 
-                  alt={product.title} 
-                  style={{ objectFit: 'cover', height: '250px' }}
-                />
-              </Link>
+              <div className="position-relative">
+                <ProductBadge product={product} />
+                <Link to={`/product/${product._id}`} className="text-decoration-none text-dark">
+                  <img 
+                    src={product.images[0]} 
+                    className="card-img-top rounded-top" 
+                    alt={product.title} 
+                    style={{ objectFit: 'cover', height: '250px' }}
+                  />
+                </Link>
+              </div>
               
               <div className="card-body d-flex flex-column">
                 <Link to={`/product/${product._id}`} className="text-decoration-none text-dark">

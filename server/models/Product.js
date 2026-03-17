@@ -11,7 +11,15 @@ const productSchema = new mongoose.Schema({
   sku: { type: String, required: true }, // SKU setup 
   inventory: { type: Number, default: 0 }, // Inventory setup 
   images: [{ type: String }], // Proper images (URLs from your storage bucket) 
-  shippingSnippet: { type: String } // Short line: processing + delivery estimate 
+  shippingSnippet: { type: String }, // Short line: processing + delivery estimate 
+  options: [{
+    name: { type: String, required: true }, // e.g., "Color" or "Size"
+    values: [{ type: String, required: true }] // e.g., ["Black", "White"]
+  }],
+  seo: {
+    title: { type: String },
+    description: { type: String }
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);

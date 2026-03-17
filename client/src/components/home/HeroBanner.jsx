@@ -13,7 +13,7 @@ const HeroBanner = () => {
               Discover our latest collection designed for premium performance and everyday comfort.
             </p>
             {/* The CTA button using Bootstrap classes and an Accent Color */}
-            <Link to="/shop" className="btn btn-primary btn-lg px-5 py-3 fw-semibold shadow-sm">
+            <Link to="/shop" className="btn btn-primary btn-dark btn-lg px-5 py-3 fw-semibold shadow-sm">
               Shop the Collection
             </Link>
           </div>

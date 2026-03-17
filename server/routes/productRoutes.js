@@ -15,6 +15,35 @@ router.get('/', async (req, res) => {
   }
 });
 
+// @desc    Search products by keyword
+// @route   GET /api/products/search?q=keyword
+router.get('/search', async (req, res) => {
+  try {
+    const keyword = req.query.q;
+    
+    // If no keyword is provided, return an empty array
+    if (!keyword) {
+      return res.json([]);
+    }
+
+    // Search across title, description, and tags
+    const query = {
+      $or: [
+        { title: { $regex: keyword, $options: 'i' } }, // 'i' makes it case-insensitive
+        { description: { $regex: keyword, $options: 'i' } },
+        { tags: { $regex: keyword, $options: 'i' } },
+        { vendor: { $regex: keyword, $options: 'i' } }
+      ]
+    };
+
+    const products = await Product.find(query);
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error during search' });
+  }
+});
+
 // @desc    Fetch single product
 // @route   GET /api/products/:id
 router.get('/:id', async (req, res) => {
